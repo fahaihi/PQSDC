@@ -1,0 +1,9 @@
+How to run the AQUa tool?
+
+to encode:
+Adapt the parameters in the config_encode_qual.properties file to your wishes.
+Run: java -jar AQUa.jar config_encode_qual.properties
+
+to decode:
+Adapt the parameters in the config_decode.properties file to match the encoding settings (!make sure the tools list is the same as the encoder tool list, with the same order).
+Run: java -jar AQUa.jar config_decode.properties

@@ -1,4 +1,4 @@
-CC = icc
+CC = icpx
 CFLAGS = -std=c++11 -Wall -Werror -Wno-unused-variable -O3
 SRC = main.cpp tools.cpp message.cpp
 OBJ = $(SRC:.cpp=.o)
