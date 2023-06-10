@@ -6,14 +6,14 @@
 <br />
 <h1>
 <p align="center">
-  <img src="https://github.com/fahaihi/PMFFRC/blob/master/Log.png" alt="Logo" width="722" height="189">
+  <img src="https://github.com/fahaihi/PQSDC/blob/master/PQSDC_LOG.png" alt="Logo" width="892" height="207">
 </h1>
   <p align="center">
-    A Parallel Multi-FastQ-Files Reads Clustering Tool For Improving DNA Reads Compression.
+    A Parallel Quality Scores Data Compressors Tool For Large Scale Genomic Sequencing Data.
     </p>
 </p>
 <p align="center">
-  <a href="#about-the-pmffrc">About The Pmffrc</a> •
+  <a href="#about-the-pmffrc">About The PQSDC</a> •
   <a href="#copy-our-project">Copy Our Project</a> •
   <a href="#useage">Useage</a> •
   <a href="#example">Example</a> •
@@ -27,20 +27,20 @@
 ![screenshot](img/clip.gif)
 </p>                                                                                                                             
                                                                                                                                                       
-## About The PMFFRC 
-The PMFFRC takes the genomic sequencing Reads compression ratio as the optimization goal. It performs joint clustering compression on the Reads in multiple FastQ files by modeling the system memory, the peak memory overhead of the cascading compressor, the numeral of files, and the numeral of sequencing reads in the actual application scenarios. 
+## About The PQSDC 
+PQSDC utilizes parallel sequence partitioning and a four-level run-length prediction model to increase compression ratio while minimizing memory and time consumption. Furthermore, the compression process can be accelerated through the use of multi-core CPU clusters, resulting in a significant reduction of time overhead.
 
-PMFFRC (Parallel Multi-FastQ-Files Reads Clustering).
+PQSDC (Parallel Quality Scores Data Compressor).
 
 ## Copy Our Project
 
 Firstly, clone our tools from GitHub:
 ```shell script
-git clone https://github.com/fahaihi/PMFFRC.git
+git clone https://github.com/fahaihi/PQSDC.git
 ```
-Secondly, turn to PMMFRC directory：
+Secondly, turn to PQSDC directory：
 ```shell script
-cd PMFFRC
+cd PQSDC
 ```
 Thirdly, Run the following command：
 ```shell script
