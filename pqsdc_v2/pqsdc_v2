@@ -1,0 +1,127 @@
+#!/bin/bash
+echo "running pqsdc algorithm at $(date)"
+mode=$1
+fileName=$2
+threads=$3
+
+if [ "${mode}" = "-c" ]; then
+  echo "compression mode."
+  #echo $mode
+  echo "fileName : ${fileName}"
+  echo "threads  : ${threads}"
+  echo "savepath : ${fileName}.partition/result.pqsdc_v2"
+  logName=${fileName}.pqsdc_v2.log
+  echo "----------------------------------------------------------------------"
+  echo "1 reads partition, generate ${fileName}.partition directory."
+  (${PQSDC_V2_PATH}partition.out -c ${threads} ${fileName}) >${logName}
+  echo "2 parallel run-length encoding prediction mapping."
+  pwdPath=$(pwd)
+  cd ${fileName}.partition
+  for ((i = 1; i < 3; i++)); do
+    {
+      (${PQSDC_V2_PATH}pqsdc.out -c ${threads} data_${i}.dat) >${logName}
+    } &
+  done
+  wait
+  echo "3 cascade zpaq compressor."
+  for ((i = 0; i < 3; i++)); do
+    {
+      if ((i == 0)); then
+        (${PQSDC_V2_PATH}zpaq/zpaq a partition_dat.zpaq partition_dat -method 5 -threads ${threads}) &> ${logName}
+      fi
+      if ((i != 0)); then
+        (${PQSDC_V2_PATH}zpaq/zpaq a data_${i}.dat.PQVRC.zpaq data_${i}.dat.PQVRC -method 5 -threads ${threads}) &> ${logName}
+      fi
+    } &
+  done
+  wait
+
+  echo "4 pacing files into ${fileName}.partition/result.pqsdc_v2."
+  (tar -cf result.pqsdc_v2 data_1.dat.PQVRC.zpaq data_2.dat.PQVRC.zpaq partition_dat.zpaq) >${logName}
+  (ls -l --block-size=1 result.pqsdc_v2) >${logName}
+
+  echo "5 removing redundant files."
+  #mv ${fileName%%.qualities}.pqsrc_v1 ${pwdPath}
+  rm -rf *dat*
+  cd ${pwdPath}
+  #rm -rf ${fileName}.partition
+  echo "over!"
+  echo "----------------------------------------------------------------------"
+fi
+
+if [ "${mode}" = "-d" ]; then # 输入文件夹
+  logName=${fileName}.pqsdc_v2.log
+  echo "de-compression mode"
+  echo "fileName : ${fileName}"
+  echo "threads  : ${threads}"
+  echo "savepath : ${fileName%%.qualities.partition}.pqsdc_de_v2"
+  echo "----------------------------------------------------------------------"
+  echo "1 unpacking ${fileName}/result.pqsdc_v2."
+  pwdPath=$(pwd)
+  cd ${fileName}
+  (tar -xvf result.pqsdc_v2) >${logName}
+
+  echo "2 unsing zpaq decompression files."
+  for ((i = 0; i < 3; i++)); do
+    {
+      if ((i == 0)); then
+        (${PQSDC_V2_PATH}zpaq/zpaq x partition_dat.zpaq -method 5 -threads ${threads}) &>${logName}
+      fi
+      if ((i != 0)); then
+        (${PQSDC_V2_PATH}zpaq/zpaq x data_${i}.dat.PQVRC.zpaq -method 5 -threads ${threads}) &>${logName}
+      fi
+    } &
+  done
+  wait
+
+  echo "3 parallel run-length encoding prediction mapping."
+  for ((i = 1; i < 3; i++)); do
+    {
+      (${PQSDC_V2_PATH}pqsdc.out -d ${threads} data_${i}.dat.PQVRC) >${logName}
+    } &
+  done
+  wait
+  echo "4 merge partitions to restore the original file"
+  cd ..
+  (${PQSDC_V2_PATH}partition.out -d ${threads} ${fileName}) >${logName}
+  rm -rf ${fileName}
+  cd ${pwdPath}
+  echo "over"
+  echo "----------------------------------------------------------------------"
+
+fi
+
+if [ "${mode}" = "-h" ]; then
+  echo "help message mode"
+  echo "---------------------------------------------------------------------------------------"
+  echo "PQSDC is a command-line tools for parallel genonoic quality scores data compression"
+  echo "Authors: SH-ZYF-XHN-MHD-DY"
+  echo "Version: pqsdc_v2[20230617]"
+  echo "Contact us: sunh@nbjl.nankai.edu.cn"
+  echo
+  echo "USEAGE"
+  echo "Basic Useage: pqsdc_v1 [command option]"
+  echo "   -c [qualities file] [threads]                      *compression mode."
+  echo "   -d [pqsdc generate directory] [threads]            *decompression mode."
+  echo "   -h                                                 *print this message."
+  echo "Advanced Usage:pqsdc_tools [command option]"
+  echo "   -fileinfo [input-fastq-file]                       *print basic statistic information."
+  echo "   -dirinfo [input-dir-name]                          *print basic statistic information."
+  echo "   -verify [source-fastq-file] <mode> [verify-file]   *verify decompression."
+  echo "      <mode> = reads"
+  echo "      <mode> = qualities"
+  echo "   -filesplite [input-fastq-file] mode <mode>         *splite a FastQ file according <mode>."
+  echo "      <mode> = ids"
+  echo "      <mode> = reads"
+  echo "      <mode> = describes"
+  echo "      <mode> = qualities"
+  echo "      <mode> = all"
+  echo
+  echo "EXAMPLES"
+  echo "  pqsdc_v2 -c test.qualities 20 "
+  echo "  pqsdc_v2 -d test.qualities.partition 20"
+  echo "  pqsdc_tools -verify test.fastq qualities test.pqsdc_de_v2"
+  echo "  pqsdc_tools -filesplite mode qualities"
+  echo "---------------------------------------------------------------------------------------"
+
+fi
