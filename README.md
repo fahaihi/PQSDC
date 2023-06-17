@@ -80,7 +80,7 @@ notes: The BIOCONDA version will be updated soon...
 We present the validation dataset `PQSDC/data/test.qualities` 
 #### 1、Using 8 CPU cores for compression.
 ```sh
-cd data
+cd ${PQSDC_V2_PATH}data
 pqsdc_v2 -c test.qualities 8
 ```
 results:
