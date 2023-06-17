@@ -54,13 +54,12 @@ export PQSDC_V2_PATH="`pwd`/"
 source ~/.bashrc
 ```
 ## Usage
-After configuring the `PMFFRC/src/*_compressor.sh` and `PMFFRC/src/*_decompressor.sh` files, run `PMFFRC` with the following command:
 ```sh
     Basic Useage: pqsdc_v2 [command option]
        -c [qualities file] [threads]                      *compression mode.
        -d [pqsdc generate directory] [threads]            *decompression mode.
        -h                                                 *print this message.
-    Advanced Usage:pqsdc_tools [command option]"
+    Advanced Usage:pqsdc_tools [command option]
        -fileinfo [input-fastq-file]                       *print basic statistic information.
        -dirinfo [input-dir-name]                          *print basic statistic information.
        -verify [source-fastq-file] <mode> [verify-file]   *verify decompression.
