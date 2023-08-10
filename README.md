@@ -9,7 +9,7 @@
   <img src="https://github.com/fahaihi/PQSDC/blob/master/PQSDC_LOG.png" alt="Logo" width="892" height="207">
 </h1>
   <p align="center">
-    A Parallel Quality Scores Data Compressor For Large Scale Genomic Sequencing Data.
+    A Lossless Parallel Quality Scores Data Compressor For Large Scale Genomic Sequencing Data.
     </p>
 </p>
 <p align="center">
@@ -28,7 +28,7 @@
 </p>                                                                                                                             
                                                                                                                                                       
 ## About The PQSDC 
-PQSDC utilizes parallel sequence partitioning and a four-level run-length prediction model to increase compression ratio while minimizing memory and time consumption. Furthermore, the compression process can be accelerated through the use of multi-core CPU clusters, resulting in a significant reduction of time overhead.
+PQSDC is an experimental open-source compressor, which utilizes parallel sequence partitioning and a four-level run-length prediction model to increase compression ratio while minimizing memory and time consumption. Furthermore, the compression process can be accelerated through the use of multi-core CPU clusters, resulting in a significant reduction of time overhead.
 
 PQSDC (Parallel Quality Scores Data Compressor).
 
