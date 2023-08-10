@@ -72,7 +72,8 @@ source ~/.bashrc
           <mode> = qualities
           <mode> = all
 ```
-notes: The BIOCONDA version will be updated soon...
+Notes: In order to be compatible with any personal computer, the current version only open-sources the method of parallel compression on a single CPU node with multiple cores. 
+The BIOCONDA version will be updated soon...
 
 
 ## Examples
