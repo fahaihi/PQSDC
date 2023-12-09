@@ -75,8 +75,11 @@ source ~/.bashrc
           <mode> = all
 ```
 **Notes**: 
+
 (1)In order to be compatible with any personal computer, the current version only open-sources the method of parallel compression on a single CPU node with multiple cores. 
+
 (2)This open source version only supports fixed-length sequences. 
+
 (3)The BIOCONDA version will be updated soon...
 
 
