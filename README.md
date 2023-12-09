@@ -1,6 +1,7 @@
 # PQSDC 
 ![made-with-C++](https://img.shields.io/badge/Made%20with-C++11-brightgreen)
 ![made-with-OpenMP](https://img.shields.io/badge/Made%20with-OpenMP-blue)
+![made-with-MPI](https://img.shields.io/badge/Made%20with-MPI-red)
 
 <!-- LOGO -->
 <br />
