@@ -30,7 +30,6 @@
 ## About The PQSDC 
 PQSDC is an experimental open-source quality scores data compressor, which utilizes parallel sequence partitioning and a four-level run-length prediction model to increase compression ratio while minimizing memory and time consumption. Furthermore, the compression process can be accelerated through the use of multi-core CPU clusters, resulting in a significant reduction of time overhead.
 
-PQSDC (Parallel Quality Scores Data Compressor).
 
 **_We are about to release a new version of our PQSDC2, so stay tuned._**
 
@@ -74,15 +73,19 @@ source ~/.bashrc
           <mode> = qualities
           <mode> = all
 ```
-Notes: In order to be compatible with any personal computer, the current version only open-sources the method of parallel compression on a single CPU node with multiple cores. This open source version only supports fixed-length sequences. 
-The BIOCONDA version will be updated soon...
+**Notes**: 
+(1)In order to be compatible with any personal computer, the current version only open-sources the method of parallel compression on a single CPU node with multiple cores. 
+(2)This open source version only supports fixed-length sequences. 
+(3)The BIOCONDA version will be updated soon...
 
 
 ## Examples
 We present the validation dataset `PQSDC/data/test.qualities` 
 #### 1、Using 8 CPU cores for compression.
 ```sh
-cd ${PQSDC_V2_PATH}data
+cd ${PQSDC_V2_PATH}
+cd ..
+cd data
 pqsdc_v2 -c test.qualities 8
 ```
 results:
