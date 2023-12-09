@@ -28,9 +28,11 @@
 </p>                                                                                                                             
                                                                                                                                                       
 ## About The PQSDC 
-PQSDC is an experimental open-source compressor, which utilizes parallel sequence partitioning and a four-level run-length prediction model to increase compression ratio while minimizing memory and time consumption. Furthermore, the compression process can be accelerated through the use of multi-core CPU clusters, resulting in a significant reduction of time overhead.
+PQSDC is an experimental open-source quality scores data compressor, which utilizes parallel sequence partitioning and a four-level run-length prediction model to increase compression ratio while minimizing memory and time consumption. Furthermore, the compression process can be accelerated through the use of multi-core CPU clusters, resulting in a significant reduction of time overhead.
 
 PQSDC (Parallel Quality Scores Data Compressor).
+
+**_We are about to release a new version of our PQSDC2, so stay tuned._**
 
 ## Copy Our Project
 
@@ -72,7 +74,7 @@ source ~/.bashrc
           <mode> = qualities
           <mode> = all
 ```
-Notes: In order to be compatible with any personal computer, the current version only open-sources the method of parallel compression on a single CPU node with multiple cores. 
+Notes: In order to be compatible with any personal computer, the current version only open-sources the method of parallel compression on a single CPU node with multiple cores. This open source version only supports fixed-length sequences. 
 The BIOCONDA version will be updated soon...
 
 
@@ -152,7 +154,7 @@ Dataset download and extraction using the `SRA-Tools：https://github.com/ncbi/s
 ## Additional Information
 **Source-Version：**    V1.2023.05.18.
 
-**Latest-Version：**    V2.1.2023.06.17.
+**Latest-Version：**    V2.1.2023.06.17. V2.1.2023.12.09.
 
 **Authors:**     NBJL-BioGrop.
 
